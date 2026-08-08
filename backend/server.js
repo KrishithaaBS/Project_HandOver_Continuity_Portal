@@ -1,16 +1,25 @@
+import 'dotenv/config'; // must be the first import so env vars exist before other modules load
+
 import express from 'express';
 import connectDB from './config/db.js';
-import dotenv from 'dotenv';
 
-dotenv.config();
+import authRoutes from './routes/authRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import projectRoutes from './routes/projectRoutes.js';
+import meetingRoutes from './routes/meetingRoutes.js';
+import requestRoutes from './routes/requestRoutes.js';
 
 const app = express();
+app.use(express.json());
+
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/projects", projectRoutes);
+app.use("/api", requestRoutes);
+app.use("/api", meetingRoutes);
+
+await connectDB();
+
 app.listen(3000, () => {
-    connectDB();
     console.log('Server is running on port 3000');
 });
-
-
-//krishithaabs_db_user
-//zJ8nN9lEL6R9llc2
-//mongodb+srv://<db_username>:zJ8nN9lEL6R9llc2@cluster1.azgtvbf.mongodb.net/?appName=Cluster1
