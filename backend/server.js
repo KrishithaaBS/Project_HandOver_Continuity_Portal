@@ -2,6 +2,7 @@ import 'dotenv/config'; // must be the first import so env vars exist before oth
 
 import express from 'express';
 import connectDB from './config/db.js';
+import cors from 'cors';
 
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
@@ -10,6 +11,11 @@ import meetingRoutes from './routes/meetingRoutes.js';
 import requestRoutes from './routes/requestRoutes.js';
 
 const app = express();
+app.use(cors({
+    origin: 'http://localhost:5173', // Replace with your frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);

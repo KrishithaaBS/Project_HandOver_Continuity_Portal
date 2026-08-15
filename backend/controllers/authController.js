@@ -6,6 +6,10 @@ import jwt from "jsonwebtoken"; //prove user is logged in
 export const signup = async (req, res) => {
     try{
         const { username, email, password } = req.body;
+        const usernameexists = await User.findOne({username});
+        if (usernameexists) {
+            return res.status(400).json({success: false, message: "Username already exists, try another"});
+        }
         const existingUser = await User.findOne({email});
         if (existingUser) {
             return res.status(400).json({success: false, message: "User already exists, login"});
@@ -14,6 +18,7 @@ export const signup = async (req, res) => {
         const user = await User.create({username, email, password: passwordhash});
         res.status(201).json({success: true, message: "User created successfully"});
     }catch(error){
+        console.error("Signup error:", error);
         res.status(500).json({success: false, message: "Signup failed", error: error.message});
     }
 }
