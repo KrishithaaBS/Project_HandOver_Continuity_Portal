@@ -49,6 +49,7 @@ export function AuthProvider({ children }) {
 
 }
 
+//custom hook to use the auth context
 export function useAuth() {
     const context = useContext(AuthContext);
     if (!context) {

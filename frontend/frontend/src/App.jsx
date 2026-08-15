@@ -119,12 +119,22 @@
 //   )
 // }
 
-// export default App
-import TestClient from "./TestClient";
-const { user, isAuthenticated, loginUser, logoutUser } = useAuth();
+import { Routes, Route } from "react-router-dom";
+import Login from "./pages/login";
+import Signup from "./pages/signup";
+
+function Home() {
+  return <h1>Home Page</h1>;
+}
 
 function App() {
-  return <TestClient />;
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+    </Routes>
+  );
 }
 
 export default App;
