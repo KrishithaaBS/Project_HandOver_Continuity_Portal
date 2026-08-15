@@ -121,6 +121,7 @@
 
 // export default App
 import TestClient from "./TestClient";
+const { user, isAuthenticated, loginUser, logoutUser } = useAuth();
 
 function App() {
   return <TestClient />;
