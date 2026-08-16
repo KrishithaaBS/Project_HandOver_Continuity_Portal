@@ -3,9 +3,10 @@ import Project from "../models/Project.js";
 
 export const createRequest = async (req, res) => {
     try {
-        const { projectId, message } = req.body;
-        if (!projectId || !message) {
-            return res.status(400).json({ success: false, message: "Project ID and message are required" });
+        const { projectId } = req.params;
+        const { message } = req.body;
+        if (!message) {
+            return res.status(400).json({ success: false, message: "A message is required" });
         }
 
         // Check if the project exists
@@ -16,7 +17,7 @@ export const createRequest = async (req, res) => {
 
         // Create a new takeover request
         const takeoverRequest = await TakeOverRequest.create({
-            projectId: projectId,
+            projectId,
             requestNotes: message,
             requesterId: req.user.userId,
         });

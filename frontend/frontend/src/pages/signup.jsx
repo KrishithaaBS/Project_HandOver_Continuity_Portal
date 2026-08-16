@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { signup } from "../api/client";
+import { signup } from "../api/auth";
 
 function Signup() {
     const { loginUser } = useAuth(); //acess the loginUser function from the AuthContext

@@ -1,4 +1,4 @@
-import { signup, login } from "./api/client";
+import { signup, login } from "./api/auth";
 
 function TestClient() {
   async function testSignup() {
